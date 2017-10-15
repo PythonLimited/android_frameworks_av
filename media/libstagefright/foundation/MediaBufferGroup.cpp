@@ -126,6 +126,13 @@ void MediaBufferGroup::add_buffer(MediaBuffer *buffer) {
     mBuffers.emplace_back(buffer);
 }
 
+extern "C" status_t _ZN7android16MediaBufferGroup14acquire_bufferEPPNS_11MediaBufferE(
+                    MediaBufferGroup* group, MediaBuffer **out) {
+    ALOGD("[Decker] _ZN7android16MediaBufferGroup14acquire_bufferEPPNS_11MediaBufferE");
+    return group->acquire_buffer(out, false, 0);
+}
+
+
 extern "C" status_t _ZN7android16MediaBufferGroup14acquire_bufferEPPNS_11MediaBufferEb(
                     MediaBufferGroup* group, MediaBuffer **out, bool nonBlocking) {
     ALOGD("[Decker] _ZN7android16MediaBufferGroup14acquire_bufferEPPNS_11MediaBufferEb");
