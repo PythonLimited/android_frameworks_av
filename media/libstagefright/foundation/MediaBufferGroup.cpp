@@ -126,6 +126,12 @@ void MediaBufferGroup::add_buffer(MediaBuffer *buffer) {
     mBuffers.emplace_back(buffer);
 }
 
+extern "C" status_t _ZN7android16MediaBufferGroup14acquire_bufferEPPNS_11MediaBufferEb(
+                    MediaBufferGroup* group, MediaBuffer **out, bool nonBlocking) {
+    ALOGD("[Decker] _ZN7android16MediaBufferGroup14acquire_bufferEPPNS_11MediaBufferEb");
+    return group->acquire_buffer(out, nonBlocking, 0);
+}
+
 bool MediaBufferGroup::has_buffers() {
     if (mBuffers.size() < mGrowthLimit) {
         return true; // We can add more buffers internally.
